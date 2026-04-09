@@ -48,13 +48,25 @@
             font-weight: bold;
             color: green;
         }
+
+        .card-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #e2e8f0;
+        }
     </style>
 @endsection
 
 @section('content')
+
     <div class="d-flex justify-content-between align-items-center">
         <h1 style="margin-bottom:20px;">Available Flights ✈️</h1>
-        <a href="{{ route('home') }}" class="btn btn-primary">Back to Dashboard</a>
+        <div>
+            <a href="{{ route('home') }}" class="btn btn-primary">Back to Dashboard</a>
+            <a href="{{ route('createFlight') }}" class="btn btn-primary">Create Flight</a>
+        </div>
     </div>
 
     <div class="flights-grid">
@@ -71,21 +83,31 @@
                     <p><strong>To:</strong> {{ $flight->arrival_city }}</p>
 
                     <p>
-                        <strong>Departure:</strong><br>
+                        <strong>Departure:</strong>
                         {{ \Carbon\Carbon::parse($flight->departure_time)->format('d M Y - h:i A') }}
                     </p>
 
                     <p>
-                        <strong>Arrival:</strong><br>
+                        <strong>Arrival:</strong>
                         {{ \Carbon\Carbon::parse($flight->arrival_time)->format('d M Y - h:i A') }}
                     </p>
 
-                    <p><strong>Duration:</strong> {{ $flight->duration }} min</p>
+                    <p><strong>Duration:</strong> {{ $flight->duration }} day(s)</p>
                 </div>
 
                 <div class="flight-footer">
                     <span class="price">${{ $flight->price }}</span>
-                    <button>Book Now</button>
+                    <span>{{ $flight->seats }} seats</span>
+                </div>
+
+                <div class="card-actions">
+                    <a href="{{ route('editFlight', $flight->id) }}" class="btn-edit">
+                        ✏️ Edit
+                    </a>
+                    <button type="button" class="btn-delete-card"
+                        onclick="openDeleteModal({{ $flight->id }}, '{{ $flight->flight_number }}')">
+                        🗑️ Delete
+                    </button>
                 </div>
 
             </div>
@@ -94,4 +116,11 @@
         @endforelse
 
     </div>
+
+    {{-- Pagination --}}
+    @include('partials._pagination', ['paginator' => $flights])
+
+    {{-- Delete Confirmation Modal --}}
+    @include('partials._delete-modal')
+
 @endsection

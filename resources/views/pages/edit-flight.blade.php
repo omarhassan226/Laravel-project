@@ -3,16 +3,17 @@
 @section('content')
     <div class="form-container">
 
-        <div class="form-title">Create Flight ✈️</div>
+        <div class="form-title">Edit Flight ✏️</div>
 
-        <form action="{{ route('storeFlight') }}" method="POST">
+        <form action="{{ route('updateFlight', $flight->id) }}" method="POST">
             @csrf
+            @method('PUT')
 
-            @include('partials._flight-form', ['flight' => null])
+            @include('partials._flight-form', ['flight' => $flight])
 
             <div class="form-actions">
-                <button type="submit" class="btn btn-primary">Create</button>
-                <button type="reset" class="btn btn-secondary"><a href="{{ route('allFlights') }}">Cancel</a></button>
+                <button type="submit" class="btn btn-primary">Update</button>
+                <button type="button" class="btn btn-secondary"><a href="{{ route('allFlights') }}">Cancel</a></button>
             </div>
 
         </form>

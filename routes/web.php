@@ -39,3 +39,8 @@ Route::fallback(function () {
 Route::get('/all-flights', [FlightsController::class, 'getAllFlights'])->name('allFlights');
 Route::get('/create-flight', [FlightsController::class, 'getCreateFlightPage'])->name('createFlight');
 Route::post('/store', [FlightsController::class, 'storeFlight'])->name('storeFlight');
+Route::get('/flights/{id}/edit', [FlightsController::class, 'getEditFlightPage'])->name('editFlight');
+Route::put('/flights/{id}', [FlightsController::class, 'updateFlight'])->name('updateFlight');
+Route::delete('/flights/{id}', [FlightsController::class, 'deleteFlight'])->name('deleteFlight');
+Route::post('/calculate-duration', [FlightsController::class, 'calculateDuration'])->name('calculateDuration');
+

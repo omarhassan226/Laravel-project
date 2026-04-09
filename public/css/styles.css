@@ -1,37 +1,72 @@
+/* ================= ROOT ================= */
+
 :root {
-    --primary-color: #0f172a;
-    --btn-primary: #0f172a;
+    --primary-color: #1e2f53;
+    --btn-primary: #273d6b;
     --secondary-color: #6c757d;
     --success-color: #1bb36c;
     --danger-color: #f04052;
     --bg-color: #f8f9fa;
     --text-color: #212529;
 
+    /* Light Shades */
+    --success-light: rgba(27, 179, 108, 0.15);
+    --danger-light: rgba(240, 64, 82, 0.1);
+
+    /* Bootstrap Override */
     --bs-btn-color: #fff;
     --bs-btn-bg: var(--btn-primary);
     --bs-btn-border-color: var(--btn-primary);
     --bs-btn-hover-color: #fff;
     --bs-btn-hover-bg: var(--primary-color);
     --bs-btn-hover-border-color: var(--primary-color);
-    --bs-btn-focus-shadow-rgb: 49, 132, 253;
+    --bs-btn-focus-shadow-rgb: 15, 23, 42;
     --bs-btn-active-color: #fff;
-    --bs-btn-active-bg: #0a58ca;
-    --bs-btn-active-border-color: #0a53be;
+    --bs-btn-active-bg: var(--primary-color);
+    --bs-btn-active-border-color: var(--primary-color);
     --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
     --bs-btn-disabled-color: #fff;
     --bs-btn-disabled-bg: var(--btn-primary);
     --bs-btn-disabled-border-color: var(--btn-primary);
 }
 
+/* ================= GLOBAL ================= */
+
+body {
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+    transition: 0.3s;
+}
+
+a:hover {
+    color: #000;
+}
+
+/* ================= BUTTONS ================= */
+
 button {
     padding: 6px 12px;
     border: none;
     background: var(--btn-primary);
-    color: white;
+    color: #fff;
     border-radius: 6px;
     cursor: pointer;
 }
 
+.btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* PRIMARY */
 .btn-primary {
     background-color: var(--btn-primary) !important;
     border-color: var(--btn-primary) !important;
@@ -44,7 +79,31 @@ button {
     border-color: var(--primary-color) !important;
 }
 
-/* ================= FORM GLOBAL ================= */
+/* SECONDARY */
+.btn-secondary {
+    background: #e5e7eb;
+    color: var(--text-color);
+}
+
+/* SUCCESS */
+.btn-success {
+    background: var(--success-color);
+    color: #fff;
+}
+
+/* DANGER */
+.btn-danger {
+    background: var(--danger-color);
+    color: #fff;
+}
+
+/* DISABLED */
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* ================= FORM ================= */
 
 .form-container {
     background: #fff;
@@ -80,7 +139,7 @@ button {
     color: var(--secondary-color);
 }
 
-/* INPUT / SELECT / TEXTAREA */
+/* INPUT */
 .form-control {
     padding: 10px 12px;
     border-radius: 8px;
@@ -112,45 +171,192 @@ button {
     gap: 10px;
 }
 
-/* BUTTONS */
-.btn {
-    padding: 8px 16px;
-    border-radius: 8px;
+/* ================= CUSTOM BUTTONS ================= */
+
+.btn-edit,
+.btn-delete-card {
+    flex: 1;
+    padding: 8px 12px;
     border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
     cursor: pointer;
-    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
 }
 
-/* SECONDARY */
-.btn-secondary {
-    background: #e5e7eb;
+/* EDIT */
+.btn-edit {
+    background: var(--btn-primary);
+    color: #fff;
+}
+
+.btn-edit:hover {
+    background: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.3);
+    color: #fff;
+}
+
+/* DELETE */
+.btn-delete-card {
+    background: var(--danger-light);
+    color: var(--danger-color);
+}
+
+.btn-delete-card:hover {
+    background: var(--danger-color);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(240, 64, 82, 0.4);
+}
+
+/* ================= ALERT ================= */
+
+.success-alert {
+    background: var(--success-light);
+    color: var(--success-color);
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    animation: slideDown 0.3s ease;
+}
+
+/* ================= ANIMATION ================= */
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar {
+    width: 250px;
+    background: var(--primary-color);
+    color: var(--bg-color);
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    transition: 0.3s;
+    overflow-y: auto;
+}
+
+.sidebar.closed {
+    left: -250px;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar {
+    position: fixed;
+    left: 250px;
+    top: 0;
+    right: 0;
+    height: 60px;
+    background: var(--primary-color);
+    color: var(--bg-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    transition: 0.3s;
+    z-index: 9999;
+}
+
+.navbar.full {
+    left: 0;
+}
+
+/* ================= FOOTER ================= */
+
+.footer {
+    background: var(--primary-color);
+    color: var(--bg-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 20px;
+    transition: 0.3s;
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    box-sizing: border-box;
+}
+
+.footer.full {
+    margin-left: 0;
+    width: 100%;
+}
+
+/* ================= CONTENT ================= */
+
+.main {
+    margin-left: 250px;
+    margin-top: 60px;
+    padding: 20px;
+    transition: 0.3s;
+    background: var(--bg-color);
     color: var(--text-color);
 }
 
-/* SUCCESS */
-.btn-success {
-    background: var(--success-color);
-    color: white;
+.main.full {
+    margin-left: 0;
 }
 
-/* DANGER */
-.btn-danger {
-    background: var(--danger-color);
-    color: white;
+/* ================= SUBMENU ================= */
+
+.submenu {
+    display: none;
+    padding-left: 15px;
+    list-style: none;
 }
 
-/* DISABLED */
-button:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+.submenu.open {
+    display: block;
 }
 
-a {
-    text-decoration: none;
-    color: var(--primary-color);
-    transition: 0.3s;
+/* ================= RESPONSIVE ================= */
+
+@media(max-width: 768px) {
+    .sidebar {
+        left: -250px;
+    }
+
+    .navbar {
+        left: 0;
+    }
+
+    .footer {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .main {
+        margin-left: 0;
+    }
 }
 
-a:hover {
-    color: #000;
+/* ================= GLOBAL CONTAINER ================= */
+
+.global-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: space-between;
 }
