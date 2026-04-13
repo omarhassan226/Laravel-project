@@ -113,9 +113,20 @@ class FlightFactory extends Factory
 
         // Seats count (realistic aircraft capacity ranges)
         $seats = fake()->randomElement([
-            150, 160, 170, 180, 189,  // Narrow-body (A320, B737)
-            220, 250, 280, 300,       // Wide-body (A330, B787)
-            350, 380, 400, 440, 500,  // Large wide-body (A380, B777)
+            150,
+            160,
+            170,
+            180,
+            189,  // Narrow-body (A320, B737)
+            220,
+            250,
+            280,
+            300,       // Wide-body (A330, B787)
+            350,
+            380,
+            400,
+            440,
+            500,  // Large wide-body (A380, B777)
         ]);
 
         return [

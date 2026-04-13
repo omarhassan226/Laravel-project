@@ -7,14 +7,20 @@ use App\Models\Airline;
 use App\Models\City;
 use App\Models\Flight;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FlightsController extends Controller
 {
     public function getAllFlights()
     {
-        $flights = Flight::paginate(10);
+        //Eloquent ORM Model
+        // $flights = Flight::where('flight_number', '!=', null)->orderBy('created_at', 'desc')->take(20)->paginate(10);
+
+        //Query Builder
+        $flights = DB::table('flights')->orderBy('created_at', 'desc')->take(20)->paginate(10);
+
         return view('pages.flights-page', ['flights' => $flights]);
-    }
+    } 
 
     public function getCreateFlightPage()
     {
